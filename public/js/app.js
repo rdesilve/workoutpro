@@ -1,7 +1,7 @@
 
 var app = angular.module('MyApp', []);
 
-app.controller('appCtrl', function($scope, $http){
+app.controller('rootCtrl', function($scope, $http){
     
     
     
