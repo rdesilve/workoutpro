@@ -2,6 +2,8 @@
 
 namespace App;
 
+define('USERDATA','user_data');
+define('AUTHFLAG', 'loggedin');
 /**
  * Stores static varibles to remember the state of a user's log in session.
  * Since Auth isn't working, this class will access the session data that
@@ -10,13 +12,14 @@ namespace App;
  */
 class Authen {
     
+    
     /**
      * Flags the app to log out the user when they are redirected
      * to another page.
      */
     public static function logout(){
-        unset($_SESSION['loggedin']);
-        unset($_SESSION['nameofuser']);
+        unset($_SESSION[AUTHFLAG]);
+        unset($_SESSION[USERDATA]);
         session_destroy();
     }
    
@@ -26,8 +29,8 @@ class Authen {
      * @return type True if the user is logged in, false otherwise
      */
     public static function check(){
-        if (isset($_SESSION['loggedin'])){
-            return $_SESSION['loggedin'];
+        if (isset($_SESSION[AUTHFLAG])){
+            return $_SESSION[AUTHFLAG];
         }else{
             return false;
         }
@@ -36,9 +39,9 @@ class Authen {
      * Retrives the user's name
      * @return type The name of the user currently logged in.
      */
-    public static function name(){
-        if (isset($_SESSION['nameofuser'])){
-            return $_SESSION['nameofuser'];
+    public static function data(){
+        if (isset($_SESSION[USERDATA])){
+            return $_SESSION[USERDATA];
         }else{
             return "";
         }
@@ -49,8 +52,8 @@ class Authen {
      * @param type $name The name of the user.
      */
     public static function grant($name = "undefined"){
-        $_SESSION['loggedin'] = true;
-        $_SESSION['nameofuser'] = $name;
+        $_SESSION[AUTHFLAG] = true;
+        $_SESSION[USERDATA] = $name;
     }
 
 }

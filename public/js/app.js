@@ -6,6 +6,14 @@ app.controller('rootCtrl', function($scope, $http){
     $scope.invalidLogin = "";
     $scope.loginForm = {email:"", password:""};
     
+    $scope.getWorkouts = function(){
+        $http.get('/workouts').success(function(data){
+            $scope.workouts = data;
+        });
+    };
+    
+    $scope.getWorkouts();
+    
     $http.get('/auth').success(function(response){
         $scope.loggedin = (response === 'true');
     });

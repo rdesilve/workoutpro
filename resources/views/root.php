@@ -32,7 +32,7 @@
                     <strong>{{invalidLogin}}</strong>
                     <form class="navbar-form navbar-right" ng-submit="login()">
                         <div class="form-group">
-                            <input class="form-control" placeholder='Email' type='text' 
+                            <input class="form-control" placeholder='Email' type='email' 
                                ng-model='loginForm.email' required/>
                         </div>
                         
@@ -60,10 +60,39 @@
             <div class="container">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Your Workout Log</h3>
+                        <h3 class="panel-title" >
+                            <a href="" ng-click="getWorkouts()">Workouts</a>
+                        </h3>
                     </div>
                     <div class="panel-body">
-                        Content
+                        <div class="row">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Workout
+                                        </th>
+                                        <th>
+                                            Routines
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="workout in workouts">
+                                        <td>
+                                            {{workout.name}}
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li ng-repeat="routine in workout.routines">
+                                                    {{routine.name}}
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,13 +100,33 @@
         
         <div ng-if="!loggedin">
             <div class="container">
-                <div class="panel panel-info">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Welcome!</h3>
                     </div>
                     <div class="panel-body">
                         To view your workout log, log in at the top
-                        or register to get started.
+                        or register below to get started.
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form class="form-signin" ng-submit="">
+                            <h3 class="form-signin-heading">Register</h3>
+                            <input class="form-control" type="text" placeholder="Name"
+                                   ng-model="register.name" required/>
+                            <input class="form-control" type="email" placeholder="Email"
+                                   ng-model="register.email" required/>
+                            <input class="form-control" type="password" placeholder="Password"
+                                   ng-model="register.password" required/>
+                            <input class="form-control" type="password" placeholder="Confirm Password"
+                                   ng-model="register.confirmPassword" required/>
+                            <button class="btn btn-lg btn-primary btn-block" type='submit'>Sign Up</button>
+                        </form>
                     </div>
                 </div>
             </div>
