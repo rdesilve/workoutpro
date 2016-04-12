@@ -4,7 +4,7 @@ var app = angular.module('workoutroot', []);
 app.controller('rootCtrl', function($scope, $http){
     
     $scope.init = function(){
-        $scope.selectedWorkout = {name:"", desc:"", routines:[]};
+        $scope.selectedWorkout = {};
         $scope.selectedRoutine = {};
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = false;
@@ -15,11 +15,11 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     $scope.resetNewSetManager = function(){
-        $scope.newSet = {errorMsg:"", showErrorMsg:false};
+        $scope.addSetError = {errorMsg:"", showErrorMsg:false};
     };
     
     $scope.resetLoginManager = function(){
-        $scope.loginManager = {errorMsg:"", showErrorMsg:false};
+        $scope.loginError = {errorMsg:"", showErrorMsg:false};
     };
     
     $scope.resetRegistration = function(){
@@ -49,13 +49,13 @@ app.controller('rootCtrl', function($scope, $http){
                 $scope.resetLoginManager();
                 break;
             case '500':
-                $scope.loginManager.errorMsg = "Email or Password is Invalid!";
-                $scope.loginManager.showErrorMsg = true;
+                $scope.loginError.errorMsg = "Email or Password is Invalid!";
+                $scope.loginError.showErrorMsg = true;
                 break;
             case '100':
-                $scope.loginManager.errorMsg = "User already exists!";
+                $scope.loginError.errorMsg = "User already exists!";
                 $scope.register.email = "";
-                $scope.loginManager.showErrorMsg = true;
+                $scope.loginError.showErrorMsg = true;
                 break;
         }
         
@@ -90,7 +90,10 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     $scope.addSet = function(){
-        
+        var data = {
+            routine:$scope.selectedRoutine
+        };
+        console.log($scope.selectedRoutine);
     };
     
     $scope.selectWorkout = function(workout){

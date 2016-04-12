@@ -54,7 +54,7 @@
             </div>
         </nav>
         
-        <div ng-if="loginManager.showErrorMsg" class="alert alert-danger" role="alert">{{loginManager.errorMsg}}</div>
+        <div ng-if="loginError.showErrorMsg" class="alert alert-danger" role="alert">{{loginError.errorMsg}}</div>
         
         <div ng-if="loggedin">
             <div class="container">
@@ -184,7 +184,7 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                            <div ng-if="newSet.showErrorMsg" class="alert alert-danger" role="alert">{{newSet.errorMsg}}</div>
+                            <div ng-if="addSetError.showErrorMsg" class="alert alert-danger" role="alert">{{addSetError.errorMsg}}</div>
                             </tfoot>
                         </table>
                     </div>
