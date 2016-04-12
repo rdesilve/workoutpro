@@ -14,18 +14,16 @@
         <div ng-if='!loggedin'>
             <form ng-submit="login()">
 
-                <input name='email' type='text' ng-model='email'/>
+                <input name='email' type='text' ng-model='loginForm.email'/>
                 <br/>
-                <input name='password' type='password' ng-model='password'/>
+                <input name='password' type='password' ng-model='loginForm.password'/>
                 <br/>
                 <button type='submit'>Log In</button>
             </form>
         </div>
         
         <div ng-if="loggedin">
-            <form ng-submit="logout()">
-                <button type='submit'>Log Out</button>
-            </form>
+            <button ng-click="logout()">Log Out</button>
         </div>
         
     </body>
