@@ -11,12 +11,12 @@
         
         <h2>Workout-Pro</h2>
         
+        <strong>{{invalidLogin}}</strong>
         <div ng-if='!loggedin'>
             <form ng-submit="login()">
-
-                <input name='email' type='text' ng-model='loginForm.email'/>
+                <input name='email' type='text' ng-model='loginForm.email' required/>
                 <br/>
-                <input name='password' type='password' ng-model='loginForm.password'/>
+                <input name='password' type='password' ng-model='loginForm.password' required/>
                 <br/>
                 <button type='submit'>Log In</button>
             </form>

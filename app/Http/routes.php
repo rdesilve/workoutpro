@@ -19,7 +19,7 @@ Route::post('/login', function(){
         Authen::authenticate();
         return Authen::check() == 1 ? "true":"false";
     }else{
-        return "false";
+        return "invalid";
     }
 });
 
