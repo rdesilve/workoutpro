@@ -15,7 +15,6 @@ Route::post('/login', function(){
     
     if (Auth::attempt(Input::only('email', 'password'))){
         Authen::grant();
-        Authen::authenticate();
         return Authen::check() == 1 ? "true":"false";
     }else{
         return "invalid";
@@ -23,6 +22,5 @@ Route::post('/login', function(){
 });
 
 Route::get('/auth', function(){
-    Authen::authenticate();
     return Authen::check() == 1 ? "true":"false";
 });
