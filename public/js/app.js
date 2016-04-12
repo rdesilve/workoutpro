@@ -1,22 +1,36 @@
 
-var app = angular.module('MyApp', []);
+var app = angular.module('workoutroot', []);
 
 app.controller('rootCtrl', function($scope, $http){
     
+    $scope.email = "rdesilvey@gmail.com";
+    $scope.password = "password";
     $scope.loggedin = false;
+    
+    $http.get('/auth').success(function(response){
+        $scope.loggedin = (response === 'true');
+        console.log($scope.loggedin);
+    });
     
     $scope.login = function(){
         var data = {
-            email:$scope.login.email,
-            password:$scope.login.password
+            email:$scope.email,
+            password:$scope.password
         };
         
         $http.post('/login', data).success(function(auth){
-            $scope.loggedin = Boolean(auth);
+            $scope.loggedin = (auth === 'true');
+            if ($scope.loggedin){
+                $scope.email = "";
+                $scope.password = "";
+            }
         });
         
-        $scope.login.email = "";
-        $scope.login.password = "";
+    };
+    
+    $scope.logout = function(){
+        $http.post('/logout');
+        $scope.loggedin = false;
     };
     
 });

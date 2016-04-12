@@ -60,7 +60,7 @@ class Authen {
      * Logs the user in, or grants access to restricted pages.
      * @param type $name The name of the user.
      */
-    public static function grant($name){
+    public static function grant($name = "undefined"){
         $_SESSION['loggedin'] = true;
         $_SESSION['nameofuser'] = $name;
     }

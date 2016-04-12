@@ -7,13 +7,23 @@ Route::get('/', function () {
     return view('root');
 });
 
+Route::post('/logout', function(){
+    Authen::logout();
+    Authen::authenticate();
+});
+
 Route::post('/login', function(){
     
     if (Auth::attempt(Input::only('email', 'password'))){
-        Authen::grant(Auth::user()->name());
+        Authen::grant();
         Authen::authenticate();
-        return (string)Authen::check();
+        return Authen::check() == 1 ? "true":"false";
     }else{
         return "false";
     }
+});
+
+Route::get('/auth', function(){
+    Authen::authenticate();
+    return Authen::check() == 1 ? "true":"false";
 });

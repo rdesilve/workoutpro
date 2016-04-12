@@ -11,14 +11,22 @@
         
         <h2>Workout-Pro</h2>
         
-        <form ng-if='!loggedin' ng-submit="login()">
-            
-            <input ng-model='login.email' type='text' value=''/>
-            <br/>
-            <input ng-model='login.password' type='password'/>
-            <br/>
-            <button type='submit'>Log In</button>
-        </form>
+        <div ng-if='!loggedin'>
+            <form ng-submit="login()">
+
+                <input name='email' type='text' ng-model='email'/>
+                <br/>
+                <input name='password' type='password' ng-model='password'/>
+                <br/>
+                <button type='submit'>Log In</button>
+            </form>
+        </div>
+        
+        <div ng-if="loggedin">
+            <form ng-submit="logout()">
+                <button type='submit'>Log Out</button>
+            </form>
+        </div>
         
     </body>
     
