@@ -3,14 +3,11 @@ var app = angular.module('workoutroot', []);
 
 app.controller('rootCtrl', function($scope, $http){
     $scope.loggedin = false;
-    $scope.email = "";
-    $scope.password = "";
     $scope.invalidLogin = "";
     $scope.loginForm = {email:"", password:""};
     
     $http.get('/auth').success(function(response){
         $scope.loggedin = (response === 'true');
-        
     });
     
     $scope.login = function(){
