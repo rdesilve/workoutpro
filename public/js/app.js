@@ -11,6 +11,7 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.loggedin = false;
         $scope.loginForm = {email:"", password:""};
         $scope.newWorkout = {name:"", desc:"", routines:[]};
+        $scope.newSet = {weight:0, reps:0};
         $scope.workouts = [];
     };
     
@@ -83,17 +84,26 @@ app.controller('rootCtrl', function($scope, $http){
             desc:$scope.newWorkout.desc
         };
         
-        $http.post('/add/workout', data);
+        $http.post('/add/workout', data).success(function(){
+            $scope.workouts.push(angular.copy($scope.newWorkout));
+            $scope.newWorkout.name = "";
+        });
         
-        $scope.workouts.push(angular.copy($scope.newWorkout));
-        $scope.newWorkout.name = "";
     };
     
     $scope.addSet = function(){
+        var weight = $scope.newSet.weight;
+        var reps = $scope.newSet.reps;
         var data = {
-            routine:$scope.selectedRoutine
+            routine:$scope.selectedRoutine.id,
+            weight:weight,
+            reps:reps
         };
-        console.log($scope.selectedRoutine);
+        
+        $http.post('/add/set', data).success(function(){
+            $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
+        });
+        
     };
     
     $scope.selectWorkout = function(workout){

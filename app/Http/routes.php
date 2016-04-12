@@ -5,6 +5,7 @@ use App\Authen;
 use App\User;
 use App\Workout;
 use App\Routine;
+use App\Set;
 
 Route::get('/', function () {
     return view('root');
@@ -71,4 +72,25 @@ Route::post('/add/workout', function(){
     $user = User::findOrFail(Authen::data());
     $workout = Workout::create(Input::all());
     $user->workouts()->save($workout);
+});
+
+Route::post('/add/routine', function(){
+    
+    $workout = Workout::fineOfFail(Input::get('workout'));
+    $routine = Routine::create(Input::get('name'));
+    $workout->routines()->save($routine);
+    
+});
+
+Route::post('/add/set', function(){
+    
+    $routine = Routine::fineOfFail(Input::get('routine'));
+    
+    $set = new Set;
+    $set->weight = Input::get('weight');
+    $set->reps = Input::get('reps');
+    $set->save();
+    
+    $routine->sets()->save($set);
+    
 });

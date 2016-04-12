@@ -92,7 +92,7 @@
                                             <div class="form-group">
                                                 <input class="form-control" placeholder="name of routine" type="text" 
                                                    ng-model="newRoutine.name" required/>
-                                                <button ng-click="" class="btn btn-xs btn-primary">Add</button>
+                                                <button ng-click="addRoutine(routine)" class="btn btn-xs btn-primary">Add</button>
                                             </div>
                                         </td>
                                         <td>
