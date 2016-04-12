@@ -10,50 +10,38 @@ namespace App;
  */
 class Authen {
     
-    private static $auth = false, $nameofuser = null;
-    private static $logout = false;
-    
     /**
      * Flags the app to log out the user when they are redirected
      * to another page.
      */
     public static function logout(){
-        Authen::$logout = true;
+        unset($_SESSION['loggedin']);
+        unset($_SESSION['nameofuser']);
+        session_destroy();
     }
-    
-    /**
-     * Performs a logout if the user is being logged out, or authenticates
-     * the user.
-     */
-    public static function authenticate(){
-        if (Authen::$logout){
-            unset($_SESSION['loggedin']);
-            unset($_SESSION['nameofuser']);
-            Authen::$logout = false;
-            Authen::$auth = false;
-            Authen::$nameofuser = null;
-            session_destroy();
-        }else{
-            if (isset($_SESSION['loggedin'])){
-                Authen::$auth = $_SESSION['loggedin'];
-                Authen::$nameofuser = $_SESSION['nameofuser'];
-            }
-        }
-    }
+   
     
     /**
      * Checks to see if the user is logged in.
      * @return type True if the user is logged in, false otherwise
      */
     public static function check(){
-        return Authen::$auth;
+        if (isset($_SESSION['loggedin'])){
+            return $_SESSION['loggedin'];
+        }else{
+            return false;
+        }
     }
     /**
      * Retrives the user's name
      * @return type The name of the user currently logged in.
      */
     public static function name(){
-        return Authen::$nameofuser;
+        if (isset($_SESSION['nameofuser'])){
+            return $_SESSION['nameofuser'];
+        }else{
+            return "";
+        }
     }
     
     /**

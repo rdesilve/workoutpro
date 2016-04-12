@@ -9,7 +9,6 @@ Route::get('/', function () {
 
 Route::post('/logout', function(){
     Authen::logout();
-    Authen::authenticate();
 });
 
 Route::post('/login', function(){
