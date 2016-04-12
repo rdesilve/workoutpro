@@ -37,23 +37,23 @@ class Authen {
     }
     /**
      * Retrives the user's name
-     * @return type The name of the user currently logged in.
+     * @return type The name of the user currently logged in, null otherwise
      */
     public static function data(){
         if (isset($_SESSION[USERDATA])){
             return $_SESSION[USERDATA];
         }else{
-            return "";
+            return null;
         }
     }
     
     /**
      * Logs the user in, or grants access to restricted pages.
-     * @param type $name The name of the user.
+     * @param type $data The name of the user.
      */
-    public static function grant($name = "undefined"){
+    public static function grant($data = "undefined"){
         $_SESSION[AUTHFLAG] = true;
-        $_SESSION[USERDATA] = $name;
+        $_SESSION[USERDATA] = $data;
     }
 
 }
