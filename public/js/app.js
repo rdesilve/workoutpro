@@ -7,14 +7,16 @@ app.controller('rootCtrl', function($scope, $http){
     
     $scope.login = function(){
         var data = {
-            email:$scope.username,
-            password:$scope.password
+            email:$scope.login.email,
+            password:$scope.login.password
         };
         
         $http.post('/login', data).success(function(auth){
             $scope.loggedin = Boolean(auth);
         });
         
+        $scope.login.email = "";
+        $scope.login.password = "";
     };
     
 });

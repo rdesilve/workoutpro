@@ -13,9 +13,9 @@
         
         <form ng-if='!loggedin' ng-submit="login()">
             
-            <input ng-model='email' type='text' value=''/>
+            <input ng-model='login.email' type='text' value=''/>
             <br/>
-            <input ng-model='password' type='password'/>
+            <input ng-model='login.password' type='password'/>
             <br/>
             <button type='submit'>Log In</button>
         </form>
