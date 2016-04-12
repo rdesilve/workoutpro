@@ -16,14 +16,12 @@ app.controller('rootCtrl', function($scope, $http){
     $scope.login = function(){
         $http.post('/login', $scope.loginForm).success(function(auth){
             
-            if (auth === 'invalid'){
-                $scope.invalidLogin = "Email or Password is Invalid!";
-            }
-            
             $scope.loggedin = (auth === 'true');
             if ($scope.loggedin){
                $scope.loginForm = {email:"", password:""};
                $scope.invalidLogin = "";
+            }else{
+                $scope.invalidLogin = "Email or Password is Invalid!";
             }
         });
     };

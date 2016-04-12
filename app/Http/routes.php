@@ -15,12 +15,12 @@ Route::post('/login', function(){
     
     if (Auth::attempt(Input::only('email', 'password'))){
         Authen::grant();
-        return Authen::check() == 1 ? "true":"false";
+        return "true";
     }else{
-        return "invalid";
+        return "false";
     }
 });
 
 Route::get('/auth', function(){
-    return Authen::check() == 1 ? "true":"false";
+    return Authen::check()? "true":"false";
 });
