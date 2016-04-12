@@ -11,11 +11,10 @@ app.controller('rootCtrl', function($scope, $http){
             password:$scope.password
         };
         
-        $http.post('/login', data);
-        
-        $http.get('/authen').success(function(auth){
+        $http.post('/login', data).success(function(auth){
             $scope.loggedin = Boolean(auth);
         });
+        
     };
     
 });
