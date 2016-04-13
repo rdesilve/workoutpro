@@ -130,13 +130,17 @@ app.controller('rootCtrl', function($scope, $http){
         
     };
     
-    $scope.addRoutine = function(workout){
+    $scope.addRoutine = function(name, workout){
         var data = {
             workout:workout.id,
-            name:$scope.newRoutine.name
+            name:name
         };
         
-        $http.post('/add/routine', data);
+        $http.post('/add/routine', data).success(function(){
+            
+            $scope.newRoutine = null;
+            workout.routines.push({name:name});
+        });
     };
     
     $scope.selectWorkout = function(workout){
@@ -150,7 +154,7 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     $scope.removeRoutine = function(routine){
-        
+        $http.post('/delete/routine', routine);
     };
     
     $scope.logout = function(){

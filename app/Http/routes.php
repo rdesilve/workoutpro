@@ -55,11 +55,11 @@ Route::get('/workouts', function(){
         $workouts = $user->workouts;
         
         foreach ($workouts as $workout){
-            $workout->routines = Workout::find($workout->id)->routines;
+            $workout->routines = $workout->routines;
             
             if ($workout->routines){
                 foreach ($workout->routines as $routine){
-                    $routine->sets = Routine::find($routine->id)->sets;
+                    $routine->sets = $routine->sets;
                 }
             }
         }
@@ -77,7 +77,7 @@ Route::post('/add/workout', function(){
 Route::post('/add/routine', function(){
     
     $workout = Workout::findOrFail(Input::get('workout'));
-    $routine = Routine::create(Input::get('name'));
+    $routine = Routine::create(Input::only('name'));
     $workout->routines()->save($routine);
     
 });
@@ -85,12 +85,13 @@ Route::post('/add/routine', function(){
 Route::post('/add/set', function(){
     
     $routine = Routine::findOrFail(Input::get('routine'));
-    
-    $set = new Set;
-    $set->weight = Input::get('weight');
-    $set->reps = Input::get('reps');
-    $set->save();
-    
+    $set = Set::create(Input::only('weight', 'reps'));
     $routine->sets()->save($set);
     
+});
+
+Route::post('/delete/routine', function(){
+    $mock = Input::get('routine');
+    $routine = Routine::findOrFail($mock->id);
+    $routine->delete();
 });
