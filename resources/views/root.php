@@ -82,13 +82,13 @@
                                         <td>
                                             <ul>
                                                 <li ng-repeat="routine in workout.routines">
-                                                    {{routine.name}} <button ng-click="removeRoutine(routine)" class="btn btn-xs btn-link">Remove</button>
+                                                    {{routine.name}} <button ng-click="removeRoutine(routine, workout)" class="btn btn-xs btn-link">Remove</button>
                                                 </li>
                                             </ul>
                                             <div class="form-group">
                                                 <input class="form-control" placeholder="name of routine" type="text" 
-                                                   ng-model="newRoutine.name" required/>
-                                                <button ng-click="addRoutine(newRoutine.name, workout)" class="btn btn-xs btn-primary">Add</button>
+                                                   ng-model="workout.newRoutine.name" required/>
+                                                <button ng-click="addRoutine(workout.newRoutine.name, workout)" class="btn btn-xs btn-primary">Add</button>
                                             </div>
                                         </td>
                                         <td>

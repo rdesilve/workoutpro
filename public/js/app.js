@@ -9,11 +9,11 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = false;
         $scope.loggedin = false;
-        $scope.loginForm = null;
-        $scope.newWorkout = null;
-        $scope.newRoutine = null;
-        $scope.newSet = null;
-        $scope.workouts = null;
+        $scope.loginForm = {email:"", password:""};
+        $scope.newWorkout = {name:"", desc:"", routines:[]};
+        $scope.newRoutine = {name:""};
+        $scope.newSet = {weight:0, reps:0};
+        $scope.workouts = [];
     };
     
     $scope.resetAddSetError = function(){
@@ -136,10 +136,10 @@ app.controller('rootCtrl', function($scope, $http){
             name:name
         };
         
-        $http.post('/add/routine', data).success(function(){
+        $http.post('/add/routine', data).success(function(data){
             
-            $scope.newRoutine = null;
-            workout.routines.push({name:name});
+            workout.newRoutine.name = "";
+            workout.routines.push({name:name, id:data.id});
         });
     };
     
@@ -153,8 +153,15 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.resetAddSetError();
     };
     
-    $scope.removeRoutine = function(routine){
-        $http.post('/delete/routine', routine);
+    $scope.removeRoutine = function(routine, workout){
+        var data = {
+            routineId:routine.id
+        };
+        
+        $http.post('/delete/routine', data).success(function(){
+            var index = workout.routines.indexOf(routine);
+            workout.routines.splice(index, 1);
+        });
     };
     
     $scope.logout = function(){

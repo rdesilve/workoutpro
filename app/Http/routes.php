@@ -72,6 +72,7 @@ Route::post('/add/workout', function(){
     $user = User::findOrFail(Authen::data());
     $workout = Workout::create(Input::all());
     $user->workouts()->save($workout);
+    return $workout;
 });
 
 Route::post('/add/routine', function(){
@@ -79,7 +80,7 @@ Route::post('/add/routine', function(){
     $workout = Workout::findOrFail(Input::get('workout'));
     $routine = Routine::create(Input::only('name'));
     $workout->routines()->save($routine);
-    
+    return $routine;
 });
 
 Route::post('/add/set', function(){
@@ -87,11 +88,10 @@ Route::post('/add/set', function(){
     $routine = Routine::findOrFail(Input::get('routine'));
     $set = Set::create(Input::only('weight', 'reps'));
     $routine->sets()->save($set);
-    
+    return $set;
 });
 
 Route::post('/delete/routine', function(){
-    $mock = Input::get('routine');
-    $routine = Routine::findOrFail($mock->id);
+    $routine = Routine::findOrFail(Input::get('routineId'));
     $routine->delete();
 });
