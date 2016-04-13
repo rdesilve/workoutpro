@@ -10,8 +10,8 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutLogTable = false;
         $scope.loggedin = false;
         $scope.loginForm = {email:"", password:""};
-        $scope.newWorkout = {name:"", desc:"", routines:[]};
-        $scope.newRoutine = {name:""};
+        $scope.newWorkout = {name:"", desc:"", routines:[{sets:[]}]};
+        $scope.newRoutine = {name:"", sets:[]};
         $scope.newSet = {weight:0, reps:0};
         $scope.workouts = [];
     };
@@ -83,10 +83,11 @@ app.controller('rootCtrl', function($scope, $http){
         
         var data = {
             name:$scope.newWorkout.name,
-            desc:$scope.newWorkout.desc
+            desc:$scope.newWorkout.desc,
         };
         
-        $http.post('/add/workout', data).success(function(){
+        $http.post('/add/workout', data).success(function(response){
+            $scope.newWorkout.id = response.id;
             $scope.workouts.push(angular.copy($scope.newWorkout));
             $scope.newWorkout.name = "";
         }).error(function(){
@@ -120,6 +121,11 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.resetAddSetError();
         
         $http.post('/add/set', data).success(function(){
+            
+            if ($scope.selectedRoutine.sets === 'undefined'){
+                $scope.selectedRoutine.sets = [];
+            }
+            
             $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
             $scope.newSet.weight = 0;
             $scope.newSet.reps = 0;

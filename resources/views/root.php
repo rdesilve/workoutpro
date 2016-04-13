@@ -225,7 +225,7 @@
                         <h3 class="panel-title">Welcome!</h3>
                     </div>
                     <div class="panel-body">
-                        To view your workout log, log in at the top
+                        To view/edit your workout log, log in at the top
                         or register below to get started.
                         
                     </div>
