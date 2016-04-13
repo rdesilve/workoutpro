@@ -96,7 +96,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="btn btn-xs btn-primary">Delete Workout</button>
+                                            <button ng-click="deleteWorkout(workout)" class="btn btn-xs btn-primary">Delete Workout</button>
                                         </td>
                                     </tr>
                                     
@@ -184,7 +184,35 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                            <div ng-if="addSetError.showErrorMsg" class="alert alert-danger" role="alert">{{addSetError.errorMsg}}</div>
+                                <tr ng-show="selectedRoutine !== null">
+                                    <td colspan="3">
+                                        Sets for Routine: {{selectedRoutine.name}}
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <th>Reps</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="set in selectedRoutine.sets">      
+                                                    <td>
+                                                        {{set.weight}}
+                                                    </td>
+                                                    <td>
+                                                        {{set.reps}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div ng-if="addSetError.showErrorMsg" class="alert alert-danger" role="alert">{{addSetError.errorMsg}}</div>
+                                    </td>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>

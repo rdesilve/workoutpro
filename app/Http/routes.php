@@ -76,7 +76,7 @@ Route::post('/add/workout', function(){
 
 Route::post('/add/routine', function(){
     
-    $workout = Workout::fineOfFail(Input::get('workout'));
+    $workout = Workout::findOrFail(Input::get('workout'));
     $routine = Routine::create(Input::get('name'));
     $workout->routines()->save($routine);
     
@@ -84,7 +84,7 @@ Route::post('/add/routine', function(){
 
 Route::post('/add/set', function(){
     
-    $routine = Routine::fineOfFail(Input::get('routine'));
+    $routine = Routine::findOrFail(Input::get('routine'));
     
     $set = new Set;
     $set->weight = Input::get('weight');

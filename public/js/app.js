@@ -4,22 +4,22 @@ var app = angular.module('workoutroot', []);
 app.controller('rootCtrl', function($scope, $http){
     
     $scope.init = function(){
-        $scope.selectedWorkout = {};
-        $scope.selectedRoutine = {};
+        $scope.selectedWorkout = null;
+        $scope.selectedRoutine = null;
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = false;
         $scope.loggedin = false;
         $scope.loginForm = {email:"", password:""};
         $scope.newWorkout = {name:"", desc:"", routines:[]};
         $scope.newSet = {weight:0, reps:0};
-        $scope.workouts = [];
+        $scope.workouts = null;
     };
     
-    $scope.resetNewSetManager = function(){
+    $scope.resetAddSetError = function(){
         $scope.addSetError = {errorMsg:"", showErrorMsg:false};
     };
     
-    $scope.resetLoginManager = function(){
+    $scope.resetLoginError = function(){
         $scope.loginError = {errorMsg:"", showErrorMsg:false};
     };
     
@@ -35,7 +35,8 @@ app.controller('rootCtrl', function($scope, $http){
     
     $scope.init();
     $scope.resetRegistration();
-    $scope.resetLoginManager();
+    $scope.resetLoginError();
+    $scope.resetAddSetError();
     $scope.getWorkouts();
     
     $http.get('/auth').success(function(response){
@@ -47,7 +48,7 @@ app.controller('rootCtrl', function($scope, $http){
             case '200':
                 $scope.loggedin = true;
                 $scope.loginForm = {email:"", password:""};
-                $scope.resetLoginManager();
+                $scope.resetLoginError();
                 break;
             case '500':
                 $scope.loginError.errorMsg = "Email or Password is Invalid!";
@@ -87,6 +88,8 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/add/workout', data).success(function(){
             $scope.workouts.push(angular.copy($scope.newWorkout));
             $scope.newWorkout.name = "";
+        }).error(function(){
+            
         });
         
     };
@@ -94,25 +97,46 @@ app.controller('rootCtrl', function($scope, $http){
     $scope.addSet = function(){
         var weight = $scope.newSet.weight;
         var reps = $scope.newSet.reps;
+        
+        if (weight <= 0 || reps <= 0){
+            $scope.addSetError.errorMsg = "Weight/Reps must be greater than 0";
+            $scope.addSetError.showErrorMsg = true;
+            return;
+        }
+        
+        if ($scope.selectedRoutine === null){
+            $scope.addSetError.errorMsg = "A routine must be selected";
+            $scope.addSetError.showErrorMsg = true;
+            return;
+        }
+        
         var data = {
             routine:$scope.selectedRoutine.id,
             weight:weight,
             reps:reps
         };
         
+        $scope.resetAddSetError();
+        
         $http.post('/add/set', data).success(function(){
             $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
+            $scope.newSet.weight = 0;
+            $scope.newSet.reps = 0;
+        }).error(function(data, status){
+            $scope.addSetError.errorMsg = "Set not added: " + status;
+            $scope.addSetError.showErrorMsg = true;
         });
         
     };
     
     $scope.selectWorkout = function(workout){
         $scope.selectedWorkout = workout;
-        $scope.selectedRoutine = {};
+        $scope.selectedRoutine = null;
     };
     
     $scope.selectRoutine = function(routine){
         $scope.selectedRoutine = routine;
+        $scope.resetAddSetError();
     };
     
     $scope.removeRoutine = function(routine){
