@@ -9,9 +9,10 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = false;
         $scope.loggedin = false;
-        $scope.loginForm = {email:"", password:""};
-        $scope.newWorkout = {name:"", desc:"", routines:[]};
-        $scope.newSet = {weight:0, reps:0};
+        $scope.loginForm = null;
+        $scope.newWorkout = null;
+        $scope.newRoutine = null;
+        $scope.newSet = null;
         $scope.workouts = null;
     };
     
@@ -127,6 +128,15 @@ app.controller('rootCtrl', function($scope, $http){
             $scope.addSetError.showErrorMsg = true;
         });
         
+    };
+    
+    $scope.addRoutine = function(workout){
+        var data = {
+            workout:workout.id,
+            name:$scope.newRoutine.name
+        };
+        
+        $http.post('/add/routine', data);
     };
     
     $scope.selectWorkout = function(workout){
