@@ -13,7 +13,7 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutLogTable = true;
         $scope.loggedin = false;
         $scope.loginForm = {email:"", password:""};
-        $scope.newWorkout = {name:"", desc:"", routines:[{sets:[]}]};
+        $scope.newWorkout = {name:"", desc:"", routines:[]};
         $scope.newRoutine = {name:"", sets:[]};
         $scope.newSet = {weight:0, reps:0};
         $scope.workouts = [];
