@@ -27,7 +27,9 @@ Route::post('/login', function(){
 
 Route::post('/register', function(){
 
-    if (!Auth::attempt(Input::only('email', 'password'))){
+    $user = User::where('column', 'EQUALS', Input::get('email'))->get() or null;
+    
+    if ($user == null){
         $user = new User;
         
         $user->name = Input::get('name');
