@@ -7,7 +7,7 @@ app.controller('rootCtrl', function($scope, $http){
      * Application initialization
      */
     $scope.init = function(){
-        $scope.selectedWorkout = null;
+        $scope.selectedWorkout = {routines:[]};
         $scope.selectedRoutine = null;
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = true;
@@ -156,11 +156,9 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.resetAddSetError();
         
         $http.post('/add/set', data).success(function(){
-            
-            if ($scope.selectedRoutine.sets === 'undefined'){
+            if (typeof $scope.selectedRoutine.sets === 'undefined'){
                 $scope.selectedRoutine.sets = [];
             }
-            
             $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
             $scope.newSet.weight = 0;
             $scope.newSet.reps = 0;
