@@ -225,6 +225,10 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Deletes a set from a selected routine
+     * @param {type} set The set being deleted
+     */
     $scope.deleteSet = function(set){
         var data = {
             setId:set.id
@@ -235,6 +239,10 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Deletes a specified workout
+     * @param {type} workout The workout being deleted
+     */
     $scope.deleteWorkout = function(workout){
         var data = {
             workoutId:workout.id
