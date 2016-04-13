@@ -179,10 +179,10 @@ app.controller('rootCtrl', function($scope, $http){
             name:name
         };
         
-        $http.post('/add/routine', data).success(function(data){
+        $http.post('/add/routine', data).success(function(response){
             
             workout.newRoutine.name = "";
-            workout.routines.push({name:name, id:data.id});
+            workout.routines.push({name:name, id:response.id});
         });
     };
     
@@ -232,6 +232,16 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/delete/set', data).success(function(){
             var index = $scope.selectedRoutine.sets.indexOf(set);
             $scope.selectedRoutine.sets.splice(index, 1);
+        });
+    };
+    
+    $scope.deleteWorkout = function(workout){
+        var data = {
+            workoutId:workout.id
+        };
+        $http.post('/delete/workout', data).success(function(){
+            var index = $scope.workouts.indexOf(workout);
+            $scope.workouts.splice(index, 1);
         });
     };
     
