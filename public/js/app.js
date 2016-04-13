@@ -10,7 +10,7 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.selectedWorkout = null;
         $scope.selectedRoutine = null;
         $scope.showWorkoutTable = false;
-        $scope.showWorkoutLogTable = false;
+        $scope.showWorkoutLogTable = true;
         $scope.loggedin = false;
         $scope.loginForm = {email:"", password:""};
         $scope.newWorkout = {name:"", desc:"", routines:[{sets:[]}]};
