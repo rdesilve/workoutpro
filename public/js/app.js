@@ -27,7 +27,7 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     /**
-     * Resets the login form
+     * Resets the 'login' error log
      */
     $scope.resetLoginError = function(){
         $scope.loginError = {errorMsg:"", showErrorMsg:false};
