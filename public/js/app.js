@@ -3,6 +3,9 @@ var app = angular.module('workoutroot', []);
 
 app.controller('rootCtrl', function($scope, $http){
     
+    /**
+     * Application initialization
+     */
     $scope.init = function(){
         $scope.selectedWorkout = null;
         $scope.selectedRoutine = null;
@@ -16,34 +19,55 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.workouts = [];
     };
     
+    /**
+     * Resets the 'add set' error log
+     */
     $scope.resetAddSetError = function(){
         $scope.addSetError = {errorMsg:"", showErrorMsg:false};
     };
     
+    /**
+     * Resets the login form
+     */
     $scope.resetLoginError = function(){
         $scope.loginError = {errorMsg:"", showErrorMsg:false};
     };
     
+    /**
+     * Resets the registration form
+     */
     $scope.resetRegistration = function(){
         $scope.register = {name:"", email:"", password:""};
     };
     
+    /**
+     * Gets all the workouts for the user
+     */
     $scope.getWorkouts = function(){
         $http.get('/workouts').success(function(data){
             $scope.workouts = data;
         });
     };
     
+    /**
+     * Perform initial application setup
+     */
     $scope.init();
     $scope.resetRegistration();
     $scope.resetLoginError();
     $scope.resetAddSetError();
     $scope.getWorkouts();
     
+    /**
+     * Authenticate when the webpage is opened
+     */
     $http.get('/auth').success(function(response){
         $scope.loggedin = (response === '200');
     });
     
+    /**
+     * Perform user authentication
+     */
     $scope.authUser = function(auth){
         switch(auth){
             case '200':
@@ -64,6 +88,9 @@ app.controller('rootCtrl', function($scope, $http){
         
     };
     
+    /**
+     * Log in a user
+     */
     $scope.login = function(){
         $http.post('/login', $scope.loginForm).success(function(auth){
             $scope.authUser(auth);
@@ -71,6 +98,9 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Register a new user
+     */
     $scope.registerUser = function(){
         $http.post('/register', $scope.register).success(function(auth){
             $scope.authUser(auth);
@@ -79,6 +109,9 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Adds a new workout
+     */
     $scope.addWorkout = function(){
         
         var data = {
@@ -96,6 +129,9 @@ app.controller('rootCtrl', function($scope, $http){
         
     };
     
+    /**
+     * Adds a new Set to a selected Routine
+     */
     $scope.addSet = function(){
         var weight = $scope.newSet.weight;
         var reps = $scope.newSet.reps;
@@ -136,6 +172,12 @@ app.controller('rootCtrl', function($scope, $http){
         
     };
     
+    
+    /**
+     * Adds a new Routine
+     * @param {type} name The name of the new routine
+     * @param {type} workout The workout that routine is being added to
+     */
     $scope.addRoutine = function(name, workout){
         var data = {
             workout:workout.id,
@@ -149,16 +191,29 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Selects a workout and persists the workout object.
+     * @param {type} workout The workout being selected.
+     */
     $scope.selectWorkout = function(workout){
         $scope.selectedWorkout = workout;
         $scope.selectedRoutine = null;
     };
     
+    /**
+     * Selects a routine and persists the routine object.
+     * @param {type} routine The routine being selected.
+     */
     $scope.selectRoutine = function(routine){
         $scope.selectedRoutine = routine;
         $scope.resetAddSetError();
     };
     
+    /**
+     * Removes a routine.
+     * @param {type} routine The routine being removed
+     * @param {type} workout The workout that the routine is being removed from.
+     */
     $scope.removeRoutine = function(routine, workout){
         var data = {
             routineId:routine.id
@@ -170,6 +225,9 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
+    /**
+     * Logs out the current user.
+     */
     $scope.logout = function(){
         $http.post('/logout');
         $scope.loggedin = false;

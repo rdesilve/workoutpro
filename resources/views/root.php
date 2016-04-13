@@ -42,8 +42,9 @@
                         <button class="btn btn-success" type="submit">Log In</button>
                     </form>
                 </div>
+                
+                <!-- If the user is logged in then display a log out button -->
                 <div ng-if="loggedin">
-                    
                     <div class="navbar-form form-group">
                         <button class="btn btn-success navbar-right" ng-click="logout()">Log Out</button>
                     </div>
