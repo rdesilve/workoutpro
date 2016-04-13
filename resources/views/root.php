@@ -188,6 +188,7 @@
                                                 <tr>
                                                     <th>Weight</th>
                                                     <th>Reps</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -198,6 +199,7 @@
                                                     <td>
                                                         {{set.reps}}
                                                     </td>
+                                                    <td><button ng-click="deleteSet(set)" class="btn btn-xs btn-primary">Delete</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
