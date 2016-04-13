@@ -1,11 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
-use App\Authen;
-use App\User;
-use App\Workout;
-use App\Routine;
-use App\Set;
+use App\Authen, App\User, App\Workout, App\Routine, App\Set;
 
 Route::get('/', function () {
     return view('root');
