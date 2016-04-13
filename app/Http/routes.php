@@ -93,3 +93,12 @@ Route::post('/delete/routine', function(){
     $routine = Routine::findOrFail(Input::get('routineId'));
     $routine->delete();
 });
+
+Route::post('/delete/workout', function(){
+    $workoutId = Input::get('workoutId');
+    Workout::findOrFail($workoutId)->delete();
+});
+
+Route::post('/delete/set', function(){
+    Set::findOrFail(Input::get('setId'))->delete();
+});

@@ -155,8 +155,9 @@ app.controller('rootCtrl', function($scope, $http){
         
         $scope.resetAddSetError();
         
-        $http.post('/add/set', data).success(function(){
-            $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
+        $http.post('/add/set', data).success(function(response){
+            var newId = response.id;
+            $scope.selectedRoutine.sets.push({weight:weight, reps:reps, id:newId});
             $scope.newSet.weight = 0;
             $scope.newSet.reps = 0;
         }).error(function(data, status){
@@ -221,6 +222,16 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/delete/routine', data).success(function(){
             var index = workout.routines.indexOf(routine);
             workout.routines.splice(index, 1);
+        });
+    };
+    
+    $scope.deleteSet = function(set){
+        var data = {
+            setId:set.id
+        };
+        $http.post('/delete/set', data).success(function(){
+            var index = $scope.selectedRoutine.sets.indexOf(set);
+            $scope.selectedRoutine.sets.splice(index, 1);
         });
     };
     

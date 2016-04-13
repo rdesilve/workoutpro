@@ -149,7 +149,6 @@
                                                 Workout
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
-                                                
                                                 <li ng-repeat="workout in workouts">
                                                     <button ng-click="selectWorkout(workout)" class="btn btn-xs btn-link">{{workout.name}}</button>
                                                 </li>
@@ -211,7 +210,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -236,10 +234,8 @@
                     <div class="panel-body">
                         To view/edit your workout log, log in at the top
                         or register below to get started.
-                        
                     </div>
                 </div>
-                
             </div>
             <div class="container">
                 <div class="row">
