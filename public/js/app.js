@@ -104,7 +104,6 @@ app.controller('rootCtrl', function($scope, $http){
     $scope.registerUser = function(){
         $http.post('/register', $scope.register).success(function(auth){
             $scope.authUser(auth);
-            $scope.resetRegistration();
             $scope.getWorkouts();
         });
     };
@@ -231,6 +230,7 @@ app.controller('rootCtrl', function($scope, $http){
     $scope.logout = function(){
         $http.post('/logout');
         $scope.loggedin = false;
+        $scope.resetRegistration();
     };
     
 });
