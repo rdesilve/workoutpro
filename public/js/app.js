@@ -156,9 +156,6 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.resetAddSetError();
         
         $http.post('/add/set', data).success(function(){
-            if (typeof $scope.selectedRoutine.sets === 'undefined'){
-                $scope.selectedRoutine.sets = [];
-            }
             $scope.selectedRoutine.sets.push({weight:weight, reps:reps});
             $scope.newSet.weight = 0;
             $scope.newSet.reps = 0;
@@ -203,6 +200,11 @@ app.controller('rootCtrl', function($scope, $http){
      */
     $scope.selectRoutine = function(routine){
         $scope.selectedRoutine = routine;
+        
+        if (typeof $scope.selectedRoutine.sets === 'undefined'){
+            $scope.selectedRoutine.sets = [];
+        }
+        
         $scope.resetAddSetError();
     };
     
