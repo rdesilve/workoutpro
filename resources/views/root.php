@@ -19,13 +19,14 @@
     <body ng-controller="rootCtrl">
         
         <h2>Workout-Pro</h2>
-        
+        <!-- Navbar -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <strong class="navbar-brand">Workout Logger</strong>
                 </div>
                 
+                <!-- If the user is not logged in, show the login inputs-->
                 <div ng-if="!loggedin">
                     <form class="navbar-form navbar-right" ng-submit="login()">
                         <div class="form-group">
@@ -50,9 +51,13 @@
             </div>
         </nav>
         
+        <!-- Login error message -->
         <div ng-if="loginError.showErrorMsg" class="alert alert-danger" role="alert">{{loginError.errorMsg}}</div>
         
+        <!--The container that holds the workouts table and workout log-->
         <div ng-if="loggedin">
+            
+            <!--The container that holds the workout display table-->
             <div class="container">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -113,6 +118,8 @@
                     </div>
                 </div>
             </div>
+            
+            <!--The container that holds the workout log-->
             <div class="container">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -218,6 +225,7 @@
             </div>
         </div>
         
+        <!--The container that holds the registration form-->
         <div ng-if="!loggedin">
             <div class="container">
                 <div class="panel panel-default">
