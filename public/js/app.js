@@ -65,28 +65,6 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.loggedin = (response === '200');
     });
     
-    /**
-     * Perform user authentication
-     */
-    $scope.authUser = function(auth){
-        switch(auth){
-            case '200':
-                $scope.loggedin = true;
-                $scope.loginForm = {email:"", password:""};
-                $scope.resetLoginError();
-                break;
-            case '500':
-                $scope.loginError.errorMsg = "Email or Password is Invalid!";
-                $scope.loginError.showErrorMsg = true;
-                break;
-            case '100':
-                $scope.loginError.errorMsg = "User already exists!";
-                $scope.register.email = "";
-                $scope.loginError.showErrorMsg = true;
-                break;
-        }
-        
-    };
     
     /**
      * Log in a user
@@ -112,9 +90,18 @@ app.controller('rootCtrl', function($scope, $http){
      * Register a new user
      */
     $scope.registerUser = function(){
-        $http.post('/register', $scope.register).success(function(auth){
-            $scope.authUser(auth);
-            $scope.getWorkouts();
+        
+        $scope.resetLoginError();
+        
+        $http.post('/register', $scope.register).success(function(response){
+            if (response.auth){
+                $scope.loggedin = true;
+                $scope.resetRegistration();
+            }else{
+                $scope.loginError.errorMsg = "User already exists!";
+                $scope.register.email = "";
+                $scope.loginError.showErrorMsg = true;
+            }
         });
     };
     
