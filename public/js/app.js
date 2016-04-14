@@ -12,7 +12,7 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = true;
         $scope.loggedin = false;
-        $scope.loginForm = {email:"", password:""};
+        $scope.loginForm = {email:"rdesilvey@gmail.com", password:"password"};
         $scope.newWorkout = {name:"", desc:"", routines:[]};
         $scope.newRoutine = {name:"", sets:[]};
         $scope.newSet = {weight:0, reps:0};
@@ -84,6 +84,15 @@ app.controller('rootCtrl', function($scope, $http){
                 $scope.loginError.showErrorMsg = true;
             }
         });
+    };
+    
+    /**
+     * Logs out the current user.
+     */
+    $scope.logout = function(){
+        $http.post('/logout');
+        $scope.loggedin = false;
+        $scope.resetRegistration();
     };
     
     /**
@@ -250,13 +259,6 @@ app.controller('rootCtrl', function($scope, $http){
         });
     };
     
-    /**
-     * Logs out the current user.
-     */
-    $scope.logout = function(){
-        $http.post('/logout');
-        $scope.loggedin = false;
-        $scope.resetRegistration();
-    };
+    
     
 });

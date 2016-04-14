@@ -2,7 +2,7 @@
 
 namespace App;
 
-define('USERDATA','user_data');
+define('DATA','user_data');
 define('AUTHFLAG', 'loggedin');
 /**
  * Stores static varibles to remember the state of a user's log in session.
@@ -15,6 +15,10 @@ class Authen {
     
     public static function check() {
         return (isset($_SESSION[AUTHFLAG]) && $_SESSION[AUTHFLAG]);
+    }
+    
+    public static function data(){
+        return isset($_SESSION[DATA])? $_SESSION[DATA] : null;
     }
 
     public static function grant($data = 'undefined') {

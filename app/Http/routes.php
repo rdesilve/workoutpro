@@ -13,7 +13,7 @@ Route::post('/logout', function(){
 
 Route::post('/login', function(){
     
-    if (Auth::attempt(Input::only('email', 'password'))){
+    if (Auth::attempt(Input::all())){
         Authen::grant(Auth::user()->id);
         return ['auth'=>true];
     }else{
