@@ -91,8 +91,7 @@ Route::post('/add/set', function(){
 });
 
 Route::post('/delete/routine', function(){
-    $routine = Routine::findOrFail(Input::get('routineId'));
-    $routine->delete();
+    Routine::findOrFail(Input::get('routineId'))->delete();
 });
 
 Route::post('/delete/workout', function(){
