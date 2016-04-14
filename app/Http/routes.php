@@ -15,9 +15,9 @@ Route::post('/login', function(){
     
     if (Auth::attempt(Input::only('email', 'password'))){
         Authen::grant(Auth::user()->id);
-        return "200";
+        return ['auth'=>true];
     }else{
-        return "500";
+        return ['auth'=>false];
     }
 });
 
@@ -36,14 +36,14 @@ Route::post('/register', function(){
         
         Authen::grant($user->id);
         
-        return "200";
+        return ['auth'=>true];
     }else{
-        return "100";
+        return ['auth'=>false];
     }
 });
 
 Route::get('/auth', function(){
-    return Authen::check()? "200":"500";
+    return ['auth'=>Authen::check()];
 });
 
 Route::get('/workouts', function(){
