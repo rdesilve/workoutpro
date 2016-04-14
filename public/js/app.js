@@ -223,7 +223,7 @@ app.controller('rootCtrl', function($scope, $http){
      * @param {type} routine The routine being removed
      * @param {type} workout The workout that the routine is being removed from.
      */
-    $scope.removeRoutine = function(routine, workout){
+    $scope.deleteRoutine = function(routine, workout){
         var data = {
             routineId:routine.id
         };

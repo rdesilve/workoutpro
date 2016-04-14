@@ -88,7 +88,7 @@
                                         <td>
                                             <ul>
                                                 <li ng-repeat="routine in workout.routines">
-                                                    {{routine.name}} <button ng-click="removeRoutine(routine, workout)" class="btn btn-xs btn-link">Remove</button>
+                                                    {{routine.name}} <button ng-click="deleteRoutine(routine, workout)" class="btn btn-xs btn-link">Remove</button>
                                                 </li>
                                             </ul>
                                             <div class="form-group">
