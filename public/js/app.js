@@ -92,9 +92,19 @@ app.controller('rootCtrl', function($scope, $http){
      * Log in a user
      */
     $scope.login = function(){
-        $http.post('/login', $scope.loginForm).success(function(auth){
-            $scope.authUser(auth);
-            $scope.getWorkouts();
+        
+        $scope.resetLoginError();
+        
+        $http.post('/login', $scope.loginForm).success(function(response){
+            
+            if (response.auth){
+                $scope.loggedin = true;
+                $scope.loginForm = {email:"", password:""};
+                $scope.getWorkouts();
+            }else{
+                $scope.loginError.errorMsg = "Email or Password is Invalid!";
+                $scope.loginError.showErrorMsg = true;
+            }
         });
     };
     
