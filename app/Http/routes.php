@@ -7,8 +7,9 @@ Route::get('/', function () {
     return view('root');
 });
 
-Route::post('/logout', function(){
+Route::get('/logout', function(){
     Authen::logout();
+    return ['success'=>true];
 });
 
 Route::post('/login', function(){

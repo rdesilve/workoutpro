@@ -90,9 +90,12 @@ app.controller('rootCtrl', function($scope, $http){
      * Logs out the current user.
      */
     $scope.logout = function(){
-        $http.post('/logout');
-        $scope.loggedin = false;
-        $scope.resetRegistration();
+        $http.get('/logout').success(function(response){
+            if (response.success){
+                $scope.loggedin = false;
+                $scope.resetRegistration();
+            }
+        });
     };
     
     /**
