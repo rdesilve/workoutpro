@@ -20,16 +20,10 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     /**
-     * Resets the 'add set' error log
+     * Resets all the error messages.
      */
-    $scope.resetAddSetError = function(){
+    $scope.resetErrorLogs = function(){
         $scope.addSetError = {errorMsg:"", showErrorMsg:false};
-    };
-    
-    /**
-     * Resets the 'login' error log
-     */
-    $scope.resetLoginError = function(){
         $scope.loginError = {errorMsg:"", showErrorMsg:false};
     };
     
@@ -54,8 +48,7 @@ app.controller('rootCtrl', function($scope, $http){
      */
     $scope.init();
     $scope.resetRegistration();
-    $scope.resetLoginError();
-    $scope.resetAddSetError();
+    $scope.resetErrorLogs();
     $scope.getWorkouts();
     
     /**
@@ -71,7 +64,7 @@ app.controller('rootCtrl', function($scope, $http){
      */
     $scope.login = function(){
         
-        $scope.resetLoginError();
+        $scope.resetErrorLogs();
         
         $http.post('/login', $scope.loginForm).success(function(response){
             
@@ -103,7 +96,7 @@ app.controller('rootCtrl', function($scope, $http){
      */
     $scope.registerUser = function(){
         
-        $scope.resetLoginError();
+        $scope.resetErrorLogs();
         
         $http.post('/register', $scope.register).success(function(response){
             if (response.auth){
@@ -162,7 +155,7 @@ app.controller('rootCtrl', function($scope, $http){
             reps:reps
         };
         
-        $scope.resetAddSetError();
+        $scope.resetErrorLogs();
         
         $http.post('/add/set', data).success(function(response){
             var newId = response.id;
@@ -215,7 +208,7 @@ app.controller('rootCtrl', function($scope, $http){
             $scope.selectedRoutine.sets = [];
         }
         
-        $scope.resetAddSetError();
+        $scope.resetErrorLogs();
     };
     
     /**
