@@ -55,7 +55,7 @@ app.controller('rootCtrl', function($scope, $http){
      * Authenticate when the webpage is opened
      */
     $http.get('/auth').success(function(response){
-        $scope.loggedin = (response === '200');
+        $scope.loggedin = response.auth;
     });
     
     
@@ -224,6 +224,7 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/delete/routine', data).success(function(){
             var index = workout.routines.indexOf(routine);
             workout.routines.splice(index, 1);
+            $scope.selectedRoutine = null;
         });
     };
     
