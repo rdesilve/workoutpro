@@ -14,7 +14,7 @@ class Authen {
     
     
     public static function check() {
-        return (isset($_SESSION[AUTHFLAG]) && $_SESSION[AUTHFLAG]);
+        return isset($_SESSION[AUTHFLAG]);
     }
     
     public static function data(){

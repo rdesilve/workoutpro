@@ -24,9 +24,9 @@ Route::post('/login', function(){
 
 Route::post('/register', function(){
 
-    $user = User::where('column', 'EQUALS', Input::get('email'))->get() or null;
-    
-    if ($user == null){
+    $count = User::where('email', Input::get('email'))->count();
+
+    if ($count == 0){
         $user = new User;
         
         $user->name = Input::get('name');
