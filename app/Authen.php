@@ -26,7 +26,7 @@ class Authen {
         $_SESSION[DATA] = $data;
     }
 
-    public static function loggout() {
+    public static function logout() {
         session_destroy();
     }
 
