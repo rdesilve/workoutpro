@@ -161,8 +161,6 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/add/set', data).success(function(response){
             var newId = response.id;
             $scope.selectedRoutine.sets.push({weight:weight, reps:reps, id:newId});
-            $scope.newSet.weight = 0;
-            $scope.newSet.reps = 0;
         }).error(function(data, status){
             $scope.addSetError.errorMsg = "Set not added: " + status;
             $scope.addSetError.showErrorMsg = true;
