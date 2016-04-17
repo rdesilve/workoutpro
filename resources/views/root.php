@@ -110,9 +110,11 @@
                                     <tr>
                                         <td>
                                             <div class="form-group">
-                                                <input class="form-control" placeholder="name of workout" type="text" 
-                                                   ng-model="newWorkout.name" required/>
-                                                <button ng-click="addWorkout()" class="btn btn-xs btn-primary">Add Workout</button>
+                                                <form ng-submit="addWorkout()">
+                                                    <input class="form-control" placeholder="name of workout" type="text" 
+                                                       ng-model="newWorkout.name" required/>
+                                                    <button type="submit" class="btn btn-xs btn-primary">Add Workout</button>
+                                                </form>
                                             </div>
                                             
                                         </td>
