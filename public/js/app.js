@@ -138,14 +138,14 @@ app.controller('rootCtrl', function($scope, $http){
         var weight = $scope.newSet.weight;
         var reps = $scope.newSet.reps;
         
-        if (weight <= 0 || reps <= 0){
-            $scope.addSetError.errorMsg = "Weight/Reps must be greater than 0";
+        if ($scope.selectedRoutine === null){
+            $scope.addSetError.errorMsg = "A routine must be selected";
             $scope.addSetError.showErrorMsg = true;
             return;
         }
         
-        if ($scope.selectedRoutine === null){
-            $scope.addSetError.errorMsg = "A routine must be selected";
+        if (weight <= 0 || reps <= 0){
+            $scope.addSetError.errorMsg = "Weight/Reps must be greater than 0";
             $scope.addSetError.showErrorMsg = true;
             return;
         }
