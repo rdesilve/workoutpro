@@ -180,9 +180,9 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="weight" type="number" 
+                                            <input class="form-control" placeholder="weight/distance" type="text" 
                                                ng-model="newSet.weight" required/>
-                                            <input class="form-control" placeholder="reps" type="number" 
+                                            <input class="form-control" placeholder="reps/time" type="text" 
                                                ng-model="newSet.reps" required/>
                                             <button ng-click="addSet()" class="btn btn-xs btn-primary">Add Set</button>
                                         </div>
