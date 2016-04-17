@@ -23,8 +23,9 @@ app.controller('rootCtrl', function($scope, $http){
      * Resets all the error messages.
      */
     $scope.resetErrorLogs = function(){
-        $scope.addSetError = {errorMsg:"", showErrorMsg:false};
-        $scope.loginError = {errorMsg:"", showErrorMsg:false};
+        var def = {errorMsg:"", showErrorMsg:false};
+        $scope.addSetError = angular.copy(def);
+        $scope.loginError = angular.copy(def);
     };
     
     /**
@@ -182,7 +183,6 @@ app.controller('rootCtrl', function($scope, $http){
         };
         
         $http.post('/add/routine', data).success(function(response){
-            
             workout.newRoutine.name = "";
             workout.routines.push({name:name, id:response.id});
         });

@@ -95,9 +95,11 @@
                                                 </li>
                                             </ul>
                                             <div class="form-group">
-                                                <input class="form-control" placeholder="name of routine" type="text" 
-                                                   ng-model="workout.newRoutine.name" required/>
-                                                <button ng-click="addRoutine(workout.newRoutine.name, workout)" class="btn btn-xs btn-primary">Add</button>
+                                                <form ng-submit="addRoutine(workout.newRoutine.name, workout)">
+                                                    <input class="form-control" placeholder="name of routine" type="text" 
+                                                       ng-model="workout.newRoutine.name" required/>
+                                                    <button type="submit" class="btn btn-xs btn-primary">Add</button>
+                                                </form>
                                             </div>
                                         </td>
                                         <td>
