@@ -12,7 +12,6 @@ app.controller('rootCtrl', function($scope, $http){
         $scope.showWorkoutTable = false;
         $scope.showWorkoutLogTable = true;
         $scope.loggedin = false;
-        $scope.loginForm = {email:"rdesilvey@gmail.com", password:"password"};
         $scope.newWorkout = {name:"", desc:"", routines:[]};
         $scope.newRoutine = {name:"", sets:[]};
         $scope.newSet = {weight:0, reps:0};
@@ -36,6 +35,13 @@ app.controller('rootCtrl', function($scope, $http){
     };
     
     /**
+     * Resets the login form
+     */
+    $scope.resetLogin = function(){
+        $scope.loginForm = {email:"rdesilvey@gmail.com", password:"password"};
+    };
+    
+    /**
      * Gets all the workouts for the user
      */
     $scope.getWorkouts = function(){
@@ -49,6 +55,7 @@ app.controller('rootCtrl', function($scope, $http){
      */
     $scope.init();
     $scope.resetRegistration();
+    $scope.resetLogin();
     $scope.resetErrorLogs();
     $scope.getWorkouts();
     
@@ -71,7 +78,7 @@ app.controller('rootCtrl', function($scope, $http){
             
             if (response.auth){
                 $scope.loggedin = true;
-                $scope.loginForm = {email:"", password:""};
+                $scope.resetLogin();
                 $scope.getWorkouts();
             }else{
                 $scope.loginError.errorMsg = "Email or Password is Invalid!";
