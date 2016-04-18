@@ -258,6 +258,8 @@ app.controller('rootCtrl', function($scope, $http){
         $http.post('/delete/workout', data).success(function(){
             var index = $scope.workouts.indexOf(workout);
             $scope.workouts.splice(index, 1);
+            $scope.selectedRoutine = null;
+            $scope.selectedWorkout = null;
         });
     };
     

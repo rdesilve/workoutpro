@@ -54,11 +54,10 @@ Route::get('/workouts', function(){
         $workouts = $user->workouts;
         
         foreach ($workouts as $workout){
-            $workout->routines = $workout->routines;
-            
+            $workout->routines;
             if ($workout->routines){
                 foreach ($workout->routines as $routine){
-                    $routine->sets = $routine->sets;
+                    $routine->sets;
                 }
             }
         }
