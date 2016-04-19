@@ -38,7 +38,7 @@ app.controller('rootCtrl', function($scope, $http){
      * Resets the login form
      */
     $scope.resetLogin = function(){
-        $scope.loginForm = {email:"rdesilvey@gmail.com", password:"password"};
+        $scope.loginForm = {email:"", password:""};
     };
     
     /**
